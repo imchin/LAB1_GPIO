@@ -217,18 +217,18 @@ int main(void)
 		case(two):
 				switch(onoffthree){
 					case(one):
-						if(HAL_GetTick()-timestampforthree>=500){
+						if(HAL_GetTick()-timestampforthree>=1500){
 							timestampforthree=HAL_GetTick();
 							onoffthree=two;
 						}
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 					break;
 					case(two):
-						if(HAL_GetTick()-timestampforthree>=1500){
+						if(HAL_GetTick()-timestampforthree>=500){
 							timestampforthree=HAL_GetTick();
 							onoffthree=one;
 						}
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
 					break;
 					}
 		break;

@@ -764,50 +764,50 @@ int main(void)
  8000716:	2b01      	cmp	r3, #1
  8000718:	d002      	beq.n	8000720 <main+0x248>
  800071a:	2b02      	cmp	r3, #2
- 800071c:	d013      	beq.n	8000746 <main+0x26e>
+ 800071c:	d014      	beq.n	8000748 <main+0x270>
 							onoffthree=one;
 						}
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
 					break;
 					}
 		break;
  800071e:	e026      	b.n	800076e <main+0x296>
-						if(HAL_GetTick()-timestampforthree>=500){
+						if(HAL_GetTick()-timestampforthree>=1500){
  8000720:	f000 fac0 	bl	8000ca4 <HAL_GetTick>
  8000724:	4602      	mov	r2, r0
  8000726:	693b      	ldr	r3, [r7, #16]
  8000728:	1ad3      	subs	r3, r2, r3
- 800072a:	f5b3 7ffa 	cmp.w	r3, #500	; 0x1f4
- 800072e:	d304      	bcc.n	800073a <main+0x262>
+ 800072a:	f240 52db 	movw	r2, #1499	; 0x5db
+ 800072e:	4293      	cmp	r3, r2
+ 8000730:	d904      	bls.n	800073c <main+0x264>
 							timestampforthree=HAL_GetTick();
- 8000730:	f000 fab8 	bl	8000ca4 <HAL_GetTick>
- 8000734:	6138      	str	r0, [r7, #16]
+ 8000732:	f000 fab7 	bl	8000ca4 <HAL_GetTick>
+ 8000736:	6138      	str	r0, [r7, #16]
 							onoffthree=two;
- 8000736:	2302      	movs	r3, #2
- 8000738:	753b      	strb	r3, [r7, #20]
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
- 800073a:	2201      	movs	r2, #1
- 800073c:	2140      	movs	r1, #64	; 0x40
- 800073e:	4812      	ldr	r0, [pc, #72]	; (8000788 <main+0x2b0>)
- 8000740:	f000 fd3c 	bl	80011bc <HAL_GPIO_WritePin>
+ 8000738:	2302      	movs	r3, #2
+ 800073a:	753b      	strb	r3, [r7, #20]
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+ 800073c:	2200      	movs	r2, #0
+ 800073e:	2140      	movs	r1, #64	; 0x40
+ 8000740:	4811      	ldr	r0, [pc, #68]	; (8000788 <main+0x2b0>)
+ 8000742:	f000 fd3b 	bl	80011bc <HAL_GPIO_WritePin>
 					break;
- 8000744:	e013      	b.n	800076e <main+0x296>
-						if(HAL_GetTick()-timestampforthree>=1500){
- 8000746:	f000 faad 	bl	8000ca4 <HAL_GetTick>
- 800074a:	4602      	mov	r2, r0
- 800074c:	693b      	ldr	r3, [r7, #16]
- 800074e:	1ad3      	subs	r3, r2, r3
- 8000750:	f240 52db 	movw	r2, #1499	; 0x5db
- 8000754:	4293      	cmp	r3, r2
- 8000756:	d904      	bls.n	8000762 <main+0x28a>
+ 8000746:	e012      	b.n	800076e <main+0x296>
+						if(HAL_GetTick()-timestampforthree>=500){
+ 8000748:	f000 faac 	bl	8000ca4 <HAL_GetTick>
+ 800074c:	4602      	mov	r2, r0
+ 800074e:	693b      	ldr	r3, [r7, #16]
+ 8000750:	1ad3      	subs	r3, r2, r3
+ 8000752:	f5b3 7ffa 	cmp.w	r3, #500	; 0x1f4
+ 8000756:	d304      	bcc.n	8000762 <main+0x28a>
 							timestampforthree=HAL_GetTick();
  8000758:	f000 faa4 	bl	8000ca4 <HAL_GetTick>
  800075c:	6138      	str	r0, [r7, #16]
 							onoffthree=one;
  800075e:	2301      	movs	r3, #1
  8000760:	753b      	strb	r3, [r7, #20]
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
- 8000762:	2200      	movs	r2, #0
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+ 8000762:	2201      	movs	r2, #1
  8000764:	2140      	movs	r1, #64	; 0x40
  8000766:	4808      	ldr	r0, [pc, #32]	; (8000788 <main+0x2b0>)
  8000768:	f000 fd28 	bl	80011bc <HAL_GPIO_WritePin>
