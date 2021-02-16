@@ -116,28 +116,28 @@ int main(void)
 	statesfour[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
 	switch(stateforone){
 		case(one):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
 				stateforone=two;
 			}else{
 				led1realhaft=LED1HAFT1;
 			}
 		break;
 		case(two):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
 				stateforone=three;
 			}else{
 				led1realhaft=LED1HAFT2;
 			}
 		break;
 		case(three):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
 				stateforone=four;
 			}else{
 				led1realhaft=LED1HAFT3;
 			}
 		break;
 		case(four):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
 				stateforone=one;
 			}else{
 				led1realhaft=LED1HAFT4;
@@ -146,14 +146,14 @@ int main(void)
 	}
 	switch(statefortwo){
 		case(one):
-			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+			if(statestwo[0]==GPIO_PIN_SET && statestwo[1]==GPIO_PIN_RESET){
 				statefortwo=two;
 			}else{
 				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);
 			}
 		break;
 		case(two):
-			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+			if(statestwo[0]==GPIO_PIN_SET && statestwo[1]==GPIO_PIN_RESET){
 				statefortwo=one;
 			}else{
 				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);

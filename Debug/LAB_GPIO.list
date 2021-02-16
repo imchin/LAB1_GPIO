@@ -458,12 +458,12 @@ int main(void)
  8000560:	0800059d 	.word	0x0800059d
  8000564:	080005b5 	.word	0x080005b5
 		case(one):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
  8000568:	7b3b      	ldrb	r3, [r7, #12]
- 800056a:	2b00      	cmp	r3, #0
+ 800056a:	2b01      	cmp	r3, #1
  800056c:	d105      	bne.n	800057a <main+0xa2>
  800056e:	7b7b      	ldrb	r3, [r7, #13]
- 8000570:	2b01      	cmp	r3, #1
+ 8000570:	2b00      	cmp	r3, #0
  8000572:	d102      	bne.n	800057a <main+0xa2>
 				stateforone=two;
  8000574:	2302      	movs	r3, #2
@@ -479,12 +479,12 @@ int main(void)
 		break;
  8000580:	e024      	b.n	80005cc <main+0xf4>
 		case(two):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
  8000582:	7b3b      	ldrb	r3, [r7, #12]
- 8000584:	2b00      	cmp	r3, #0
+ 8000584:	2b01      	cmp	r3, #1
  8000586:	d105      	bne.n	8000594 <main+0xbc>
  8000588:	7b7b      	ldrb	r3, [r7, #13]
- 800058a:	2b01      	cmp	r3, #1
+ 800058a:	2b00      	cmp	r3, #0
  800058c:	d102      	bne.n	8000594 <main+0xbc>
 				stateforone=three;
  800058e:	2303      	movs	r3, #3
@@ -500,12 +500,12 @@ int main(void)
 		break;
  800059a:	e017      	b.n	80005cc <main+0xf4>
 		case(three):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
  800059c:	7b3b      	ldrb	r3, [r7, #12]
- 800059e:	2b00      	cmp	r3, #0
+ 800059e:	2b01      	cmp	r3, #1
  80005a0:	d105      	bne.n	80005ae <main+0xd6>
  80005a2:	7b7b      	ldrb	r3, [r7, #13]
- 80005a4:	2b01      	cmp	r3, #1
+ 80005a4:	2b00      	cmp	r3, #0
  80005a6:	d102      	bne.n	80005ae <main+0xd6>
 				stateforone=four;
  80005a8:	2304      	movs	r3, #4
@@ -521,12 +521,12 @@ int main(void)
 		break;
  80005b2:	e00b      	b.n	80005cc <main+0xf4>
 		case(four):
-			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+			if(statesone[0]==GPIO_PIN_SET && statesone[1]==GPIO_PIN_RESET){
  80005b4:	7b3b      	ldrb	r3, [r7, #12]
- 80005b6:	2b00      	cmp	r3, #0
+ 80005b6:	2b01      	cmp	r3, #1
  80005b8:	d105      	bne.n	80005c6 <main+0xee>
  80005ba:	7b7b      	ldrb	r3, [r7, #13]
- 80005bc:	2b01      	cmp	r3, #1
+ 80005bc:	2b00      	cmp	r3, #0
  80005be:	d102      	bne.n	80005c6 <main+0xee>
 				stateforone=one;
  80005c0:	2301      	movs	r3, #1
@@ -550,12 +550,12 @@ int main(void)
  80005d4:	d00f      	beq.n	80005f6 <main+0x11e>
  80005d6:	e01d      	b.n	8000614 <main+0x13c>
 		case(one):
-			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+			if(statestwo[0]==GPIO_PIN_SET && statestwo[1]==GPIO_PIN_RESET){
  80005d8:	7a3b      	ldrb	r3, [r7, #8]
- 80005da:	2b00      	cmp	r3, #0
+ 80005da:	2b01      	cmp	r3, #1
  80005dc:	d105      	bne.n	80005ea <main+0x112>
  80005de:	7a7b      	ldrb	r3, [r7, #9]
- 80005e0:	2b01      	cmp	r3, #1
+ 80005e0:	2b00      	cmp	r3, #0
  80005e2:	d102      	bne.n	80005ea <main+0x112>
 				statefortwo=two;
  80005e4:	2302      	movs	r3, #2
@@ -573,12 +573,12 @@ int main(void)
 		break;
  80005f4:	e00e      	b.n	8000614 <main+0x13c>
 		case(two):
-			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+			if(statestwo[0]==GPIO_PIN_SET && statestwo[1]==GPIO_PIN_RESET){
  80005f6:	7a3b      	ldrb	r3, [r7, #8]
- 80005f8:	2b00      	cmp	r3, #0
+ 80005f8:	2b01      	cmp	r3, #1
  80005fa:	d105      	bne.n	8000608 <main+0x130>
  80005fc:	7a7b      	ldrb	r3, [r7, #9]
- 80005fe:	2b01      	cmp	r3, #1
+ 80005fe:	2b00      	cmp	r3, #0
  8000600:	d102      	bne.n	8000608 <main+0x130>
 				statefortwo=one;
  8000602:	2301      	movs	r3, #1
