@@ -89,16 +89,46 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  uint8_t stateforone=0;
+  uint32_t statesone[2];
+  uint32_t statestwo[2];
+  uint32_t statesthree[2];
+  uint32_t statesfour[2];
 
+
+  enum{
+	  zero=0,one,two,three
+  };
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+	statesone[0]=HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
+	statestwo[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
+	statesthree[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
+	statesfour[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
+	switch(stateforone){
+		case(zero):
+			if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10)){
+
+			}
+		break;
+
+	}
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	statesone[1]=statesone[0];
+	statestwo[1]=statestwo[0];
+	statesthree[1]=statesthree[0];
+	statesfour[1]=statesfour[0];
+
   }
   /* USER CODE END 3 */
 }
