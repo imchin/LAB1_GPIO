@@ -98,6 +98,10 @@ int main(void)
   uint32_t timestamp1=0;
   uint32_t timeslimping=0;
   uint8_t statefortwo=1;
+  uint8_t stateforthree=1;
+  uint8_t ledcontrolthree=1;
+  uint8_t onoffthree=1;
+  uint32_t timestampforthree=0;
   enum{
 	  zero=0,one,two,three,four,LED1HAFT1=1000,LED1HAFT2=500,LED1HAFT3=250,LED1HAFT4=166,samplingtime=100
   };
@@ -160,6 +164,22 @@ int main(void)
 			}
 			break;
 	}
+	switch(stateforthree){
+		case(one):
+			if(statesthree[0]==GPIO_PIN_SET && statesthree[1]==GPIO_PIN_RESET){
+				stateforthree=two;
+			}else{
+				ledcontrolthree=one;
+			}
+		break;
+		case(two):
+			if(statesthree[0]==GPIO_PIN_SET && statesthree[1]==GPIO_PIN_RESET){
+				stateforthree=one;
+			}else{
+				ledcontrolthree=two;
+			}
+			break;
+	}
 
 
 
@@ -174,6 +194,44 @@ int main(void)
 		}else{
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
 		}
+	}
+	switch(ledcontrolthree){
+		case(one):
+			switch(onoffthree){
+				case(one):
+					if(HAL_GetTick()-timestampforthree>=500){
+						timestampforthree=HAL_GetTick();
+						onoffthree=two;
+					}
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+				break;
+				case(two):
+					if(HAL_GetTick()-timestampforthree>=1500){
+						timestampforthree=HAL_GetTick();
+						onoffthree=one;
+					}
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+				break;
+			}
+		break;
+		case(two):
+				switch(onoffthree){
+					case(one):
+						if(HAL_GetTick()-timestampforthree>=500){
+							timestampforthree=HAL_GetTick();
+							onoffthree=two;
+						}
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+					break;
+					case(two):
+						if(HAL_GetTick()-timestampforthree>=1500){
+							timestampforthree=HAL_GetTick();
+							onoffthree=one;
+						}
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+					break;
+					}
+		break;
 	}
 
 
