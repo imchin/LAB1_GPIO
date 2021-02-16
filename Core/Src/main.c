@@ -89,15 +89,17 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t stateforone=0;
-  uint32_t statesone[2];
-  uint32_t statestwo[2];
-  uint32_t statesthree[2];
-  uint32_t statesfour[2];
-
-
+  uint8_t stateforone=1;
+  uint8_t statesone[2];
+  uint8_t statestwo[2];
+  uint8_t statesthree[2];
+  uint8_t statesfour[2];
+  uint32_t led1realhaft=0;
+  uint32_t timestamp1=0;
+  uint32_t timeslimping=0;
+  uint8_t statefortwo=1;
   enum{
-	  zero=0,one,two,three
+	  zero=0,one,two,three,four,LED1HAFT1=1000,LED1HAFT2=500,LED1HAFT3=250,LED1HAFT4=166,samplingtime=100
   };
   /* USER CODE END 2 */
 
@@ -106,29 +108,85 @@ int main(void)
 
   while (1)
   {
+	if(HAL_GetTick()-timeslimping>=samplingtime){
+	timeslimping=HAL_GetTick();
 	statesone[0]=HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
 	statestwo[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
 	statesthree[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
 	statesfour[0]=HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
 	switch(stateforone){
-		case(zero):
-			if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10)){
-
+		case(one):
+			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+				stateforone=two;
+			}else{
+				led1realhaft=LED1HAFT1;
 			}
 		break;
-
+		case(two):
+			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+				stateforone=three;
+			}else{
+				led1realhaft=LED1HAFT2;
+			}
+		break;
+		case(three):
+			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+				stateforone=four;
+			}else{
+				led1realhaft=LED1HAFT3;
+			}
+		break;
+		case(four):
+			if(statesone[0]==GPIO_PIN_RESET && statesone[1]==GPIO_PIN_SET){
+				stateforone=one;
+			}else{
+				led1realhaft=LED1HAFT4;
+			}
+		break;
 	}
+	switch(statefortwo){
+		case(one):
+			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+				statefortwo=two;
+			}else{
+				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);
+			}
+		break;
+		case(two):
+			if(statestwo[0]==GPIO_PIN_RESET && statestwo[1]==GPIO_PIN_SET){
+				statefortwo=one;
+			}else{
+				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);
+			}
+			break;
+	}
+
 
 
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	if(HAL_GetTick()-timestamp1>=led1realhaft){
+		timestamp1=HAL_GetTick();
+		if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)==GPIO_PIN_SET){
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+		}else{
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+		}
+	}
+
+
+
+
+
+
+
 	statesone[1]=statesone[0];
 	statestwo[1]=statestwo[0];
 	statesthree[1]=statesthree[0];
 	statesfour[1]=statesfour[0];
-
+	}
   }
   /* USER CODE END 3 */
 }
