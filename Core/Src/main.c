@@ -103,7 +103,7 @@ int main(void)
   uint8_t onoffthree=1;
   uint32_t timestampforthree=0;
   uint32_t timestamppercent=100;
-  double f=42;
+  double f=44;
   uint8_t stateforfour=1;
   uint8_t percentpwm=0;
   uint8_t stateusefour=1;
@@ -261,15 +261,19 @@ int main(void)
 					if(HAL_GetTick()-timestampforthree>=500){
 						timestampforthree=HAL_GetTick();
 						onoffthree=two;
+					}else{
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 					}
-					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+
 				break;
 				case(two):
 					if(HAL_GetTick()-timestampforthree>=1500){
 						timestampforthree=HAL_GetTick();
 						onoffthree=one;
+					}else{
+						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
 					}
-					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+
 				break;
 			}
 		break;
@@ -279,15 +283,19 @@ int main(void)
 						if(HAL_GetTick()-timestampforthree>=1500){
 							timestampforthree=HAL_GetTick();
 							onoffthree=two;
+						}else{
+							HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 						}
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
+
 					break;
 					case(two):
 						if(HAL_GetTick()-timestampforthree>=500){
 							timestampforthree=HAL_GetTick();
 							onoffthree=one;
+						}else{
+							HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
 						}
-						HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
+
 					break;
 					}
 		break;
