@@ -102,8 +102,17 @@ int main(void)
   uint8_t ledcontrolthree=1;
   uint8_t onoffthree=1;
   uint32_t timestampforthree=0;
+  uint32_t timestamppercent=100;
+  double f=42;
+  uint8_t stateforfour=1;
+  uint8_t percentpwm=0;
+  uint8_t stateusefour=1;
+  double Ton=0;
+  double Tall=0;
+  double Toff=0;
   enum{
-	  zero=0,one,two,three,four,LED1HAFT1=1000,LED1HAFT2=500,LED1HAFT3=250,LED1HAFT4=166,samplingtime=100
+	  zero=0,one,two,three,four,five,LED1HAFT1=1000,LED1HAFT2=500,LED1HAFT3=250,LED1HAFT4=166,samplingtime=100,
+	  oneoffour=25,haft=50,three0ffour=75,full=100
   };
   /* USER CODE END 2 */
 
@@ -180,8 +189,57 @@ int main(void)
 			}
 			break;
 	}
+	switch(stateforfour){
+			case(one):
+				if(statesfour[0]==GPIO_PIN_SET && statesfour[1]==GPIO_PIN_RESET){
+					stateforfour=two;
+				}else{
+					percentpwm=zero;
+				}
+			break;
+			case(two):
+				if(statesfour[0]==GPIO_PIN_SET && statesfour[1]==GPIO_PIN_RESET){
+					stateforfour=three;
+				}else{
+					percentpwm=oneoffour;
+				}
+				break;
+			case(three):
+				if(statesfour[0]==GPIO_PIN_SET && statesfour[1]==GPIO_PIN_RESET){
+					stateforfour=four;
+				}else{
+					percentpwm=haft;
+				}
+				break;
+			case(four):
+				if(statesfour[0]==GPIO_PIN_SET && statesfour[1]==GPIO_PIN_RESET){
+					stateforfour=five;
+				}else{
+					percentpwm=three0ffour;
+				}
+				break;
+			case(five):
+				if(statesfour[0]==GPIO_PIN_SET && statesfour[1]==GPIO_PIN_RESET){
+					stateforfour=one;
+				}else{
+					percentpwm=full;
+				}
+				break;
+
+	}
 
 
+
+
+
+	statesone[1]=statesone[0];
+	statestwo[1]=statestwo[0];
+	statesthree[1]=statesthree[0];
+	statesfour[1]=statesfour[0];
+
+
+
+	}
 
 
     /* USER CODE END WHILE */
@@ -195,6 +253,7 @@ int main(void)
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
 		}
 	}
+
 	switch(ledcontrolthree){
 		case(one):
 			switch(onoffthree){
@@ -234,17 +293,46 @@ int main(void)
 		break;
 	}
 
+	Tall=1/f;
+	Ton=(percentpwm*Tall)/100;
+	Toff=Tall-Ton;
+	if(percentpwm!=zero){
+		switch(stateusefour){
+				case(one):
+					if(HAL_GetTick()-timestamppercent>=Ton*1000){
+						timestamppercent=HAL_GetTick();
+						stateusefour=two;
+					}
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+				break;
+				case(two):
+					if(HAL_GetTick()-timestamppercent>=Toff*1000){
+						timestamppercent=HAL_GetTick();
+						stateusefour=one;
+					}
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 
-
-
-
-
-
-	statesone[1]=statesone[0];
-	statestwo[1]=statestwo[0];
-	statesthree[1]=statesthree[0];
-	statesfour[1]=statesfour[0];
+				break;
+			}
+	}else{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
   /* USER CODE END 3 */
 }
